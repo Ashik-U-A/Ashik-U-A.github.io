@@ -1,0 +1,23 @@
+{
+  "name": "portfolio-github-page",
+  "version": "1.0.0",
+  "description": "The Portfolio ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ashik-U-A/Ashik-U-A.github.io.git"
+  },
+  "author": "Ashik U A",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ashik-U-A/Ashik-U-A.github.io/issues"
+  },
+  "homepage": "https://github.com/Ashik-U-A/Ashik-U-A.github.io#readme",
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}

@@ -1,3 +1,7 @@
+/**
+ * Functions that affect the Pre-Loader phase of the page.
+ */
+
 function update_progress(progress) {
     document.querySelector("#progress-bar").style.width = progress + "%";
 }
@@ -11,11 +15,25 @@ function change_preloader_text(text) {
     }, 400);
 }
 
+function close_preloader() {
+    let pre_loader = document.querySelector(".pre-loader");
+    pre_loader.style.opacity = 0;
+    setTimeout(()=>{
+        pre_loader.style.display = "none";
+    }, 800);
+}
+
+/**
+ * Functions that are the Core of the Page.
+ */
 function bootstrap_libraries() {
     fetch_lib("three.min.js", event => {
         update_progress((event.loaded / event.total) * 100);
     }).then(()=>{
         change_preloader_text("Pre-loader and Libraries tested. This site is under development");
+        setTimeout(()=>{
+            close_preloader();
+        }, 800);
     });
 }
 
@@ -29,7 +47,6 @@ function fetch_lib(library_name, progress_event_handler) {
                     document.body.appendChild((()=>{
                         let library_script_tag = document.createElement("script");
                         library_script_tag.innerHTML = request.responseText;
-                        console.log(library_script_tag);
                         return library_script_tag;
                     })());
                     resolve();

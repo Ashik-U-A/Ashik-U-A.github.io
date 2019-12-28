@@ -1,12 +1,25 @@
+function update_progress(progress) {
+    document.querySelector("#progress-bar").style.width = progress + "%";
+}
+
+function change_preloader_text(text) {
+    let para = document.querySelector(".pre-loader p");
+    para.style.opacity = 0;
+    setTimeout(()=>{
+        para.innerHTML = text;
+        para.style.opacity = 1;
+    }, 400);
+}
+
 function bootstrap_libraries() {
-    let library_load_start_time = new Date();
-    fetch_lib("three.min.js").then(()=>{
-        let library_load_end_time = new Date();
-        console.log(`Three JS Library Loaded in ${(library_load_end_time - library_load_start_time) / 1000} Seconds`);
+    fetch_lib("three.min.js", event => {
+        update_progress((event.loaded / event.total) * 100);
+    }).then(()=>{
+        change_preloader_text("Pre-loader and Libraries tested. This site is under development");
     });
 }
 
-function fetch_lib(library_name) {
+function fetch_lib(library_name, progress_event_handler) {
     return new Promise((resolve, reject) => {
         let request = new XMLHttpRequest();
         request.open("GET", "libs/" + library_name);
@@ -26,6 +39,7 @@ function fetch_lib(library_name) {
                 }
             }
         };
+        request.onprogress = progress_event_handler;
         request.send();
     });
 }

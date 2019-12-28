@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap');
 
 * {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -29,4 +29,38 @@ body {
     text-align: right;
     margin-top: 10px;
     font-size: 0.9rem;
+}
+
+.pre-loader {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background: #122;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+.pre-loader .progress {
+    width: 80%;
+    height: 1%;
+    background: linear-gradient(to bottom, rgba(130,130,130,0.2), rgba(130, 130, 130, 0.7));
+    border-radius: 100px;
+}
+.pre-loader .progress .bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to bottom, #aabb20, #cceeaa);
+    border-radius: 100px;
+    box-shadow: 0 0 5px #aabb20, 0 0 2px #fff;
+    transition: width 0.2s;
+}
+.pre-loader p {
+    text-align: center;
+    color: #aaa;
+    font-weight: 300;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    transition: opacity 0.4s;
 }

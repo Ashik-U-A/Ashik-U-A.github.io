@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Portfolio | Ashik U A</title>
-    <link rel="stylesheet" href="./styles/general.css">
-</head>
-<body>
-    <div class="info">
-        Website under Development. Sorry for the inconvenience caused.
-        <span class="sign">- Ashik U A</span>
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Portfolio | Ashik U A</title>
+        <link rel="stylesheet" href="./styles/general.css" />
+    </head>
+    <body>
+        <div class="info">
+            Website under Development. Sorry for the inconvenience caused.
+            <span class="sign">- Ashik U A</span>
+        </div>
 
-    <div class="pre-loader">
-        <div class="progress"><div class="bar" id="progress-bar"></div></div>
-        <p>Testing Libraries and Preloaders</p>
-    </div>
-    
-    <script src="./scripts/bootstrap.js"></script>
-    <script>
-        bootstrap_libraries();
-    </script>
-</body>
+        <div class="world"></div>
+
+        <!-- The Pre Loader Section appears above anything in this page. The Script takes care of the functionality of this section -->
+        <div class="pre-loader">
+            <div class="progress">
+                <div class="bar" id="progress-bar"></div>
+            </div>
+            <p>Testing Libraries and Preloaders</p>
+        </div>
+
+        <script>
+            (async () => {
+                const { bootstrap_libraries } = await import(
+                    "./scripts/bootstrap.js"
+                );
+                bootstrap_libraries();
+            })();
+        </script>
+    </body>
 </html>

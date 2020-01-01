@@ -1,3 +1,5 @@
+import { world_creator } from "./world-creator.js";
+
 /**
  * Functions that affect the Pre-Loader phase of the page.
  */
@@ -26,13 +28,15 @@ function close_preloader() {
 /**
  * Functions that are the Core of the Page.
  */
-function bootstrap_libraries() {
+export function bootstrap_libraries() {
+    console.log("Bootstraping Started");
     fetch_lib("three.min.js", event => {
         update_progress((event.loaded / event.total) * 100);
     }).then(()=>{
         change_preloader_text("Pre-loader and Libraries tested. This site is under development");
         setTimeout(()=>{
             close_preloader();
+            world_creator.create_first_world();
         }, 800);
     });
 }

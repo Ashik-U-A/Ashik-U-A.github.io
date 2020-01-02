@@ -39,6 +39,64 @@ function start_rendering() {
  * This Section of the code deals with the Content and Interaction with the 3D world.
  */
 
+/**
+ * The Sky Object
+ */
+
+let Sky = (() => {
+    let instance = null;
+
+    function init() {
+        let sky = new THREE.Mesh(
+            new THREE.SphereGeometry(1),
+            new THREE.ShaderMaterial({
+                fragmentShader: document.getElementById("sky-shader--fragment")
+                    .textContent
+            })
+        );
+        return sky;
+    }
+
+    return {
+        get_instance: () => {
+            if (!instance) {
+                instance = init();
+            }
+            return instance;
+        }
+    };
+})();
+
+/**
+ * The Terrain Object
+ */
+
+let Terrain = (() => {
+    let instance = null;
+
+    function init() {
+        return new THREE.Mesh(
+            new THREE.PlaneBufferGeometry(),
+            new THREE.MeshBasicMaterial({
+                color: 0xffff00,
+                side: THREE.DoubleSide
+            })
+        );
+    }
+
+    return {
+        get_instance: () => {
+            if (!instance) {
+                instance = init();
+                instance.setRotationFromEuler(
+                    new THREE.Euler(-90 * (Math.PI / 180), 0, 0)
+                );
+            }
+            return instance;
+        }
+    };
+})();
+
 const world = {
     camera: null,
     scene: null,
@@ -60,17 +118,12 @@ function create_first_world() {
         .querySelector(".world")
         .appendChild(world.renderer.domElement);
 
-    var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    var cube = new THREE.Mesh(geometry, material);
-    world.scene.add(cube);
-
     world.camera.position.z = 5;
+    world.camera.position.y = 2;
+    world.camera.lookAt(0, 0, 0);
 
-    add_to_pre_rendering_queue(() => {
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-    });
+    world.scene.add(Terrain.get_instance());
+    world.scene.add(Sky.get_instance());
 
     start_rendering();
 }

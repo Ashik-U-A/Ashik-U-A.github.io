@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="./styles/general.css" />
     </head>
     <body>
-        <div class="info">
+        <div class="info" style="display: none">
             Website under Development. Sorry for the inconvenience caused.
             <span class="sign">- Ashik U A</span>
         </div>
@@ -30,6 +30,22 @@
                 );
                 bootstrap_libraries();
             })();
+        </script>
+
+        <!-- The Sky Shader -->
+        <script id="sky-shader--vertex" type="x-shader/x-vertex">
+            varying vec2 vUv;
+
+            void main() {
+                vUv = uv;
+
+                gl_Position = vec4(position, 1.0);
+            }
+        </script>
+        <script id="sky-shader--fragment" type="x-shader/x-fragment">
+            void main() {
+                gl_FragColor = vec4(1.0, 0.0, 0.0, 0.5);
+            }
         </script>
     </body>
 </html>

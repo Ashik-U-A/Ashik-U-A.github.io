@@ -25,6 +25,12 @@ function create_first_world() {
     world.scene.add(cube);
 
     world.camera.position.z = 5;
+
+    start_rendering();
+}
+
+function start_rendering() {
+    requestAnimationFrame(start_rendering);
     world.renderer.render(world.scene, world.camera);
 }
 
